@@ -24,7 +24,7 @@ console.log(isOpen, open)
 
 <template>
  <div class='grid grid-cols-3 gap-2'>
-  <div v-for='product in props.data' :key='product?.id' class='' @click='openModal(product)'>
+  <div v-for='product in props.data' :key='product?.id' @click='openModal(product)'>
     <div class='img'>
       <img :src="product?.image" alt="pro-image" />
     </div>

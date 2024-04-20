@@ -16,7 +16,7 @@ console.log(props, "open")
         <div class="pro-content" @click.stop>
             <div class="pro-header">
                 <h2>{{ product?.title }}</h2>
-                <button @click="props?.closeModal">Close</button>
+                <button @click="props.closeModal">Close</button>
             </div>
             <div class="pro-body">
                 <img :src="product?.image" alt="pro-img" />
@@ -35,7 +35,7 @@ console.log(props, "open")
 <style>
 .container {
     position: fixed;
-    top: 15%;
+    top: 18%;
     left: 10%;
     width: 80%;
     height: 70vh;
@@ -43,7 +43,6 @@ console.log(props, "open")
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
 }
 
 .pro-content {

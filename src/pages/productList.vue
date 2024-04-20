@@ -46,16 +46,16 @@ watch([products, searchQuery, selected, price], ([newProducts, newSearchQuery, n
 
 // reset button to clear field
 function resetFilters() {
-    searchQuery?.value = '';
-    selected?.value = '';
-    price?.value = '';
+    searchQuery.value = '';
+    selected.value = '';
+    price.value = '';
 }
 
 // function to check suggestion
 watch(products, (newProducts) => {
     // if suggestion is true
     if (showSuggestion) {
-        suggestions?.value = newProducts.slice(0, 4);
+        suggestions.value = newProducts.slice(0, 4);
     }
 });
 
@@ -63,7 +63,7 @@ watch(products, (newProducts) => {
 function suggestProducts() {
     showSuggestion = true;
     if (!searchQuery.value.trim()) {
-        suggestions?.value = [];
+        suggestions.value = [];
         return;
     }
 
