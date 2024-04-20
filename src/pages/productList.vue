@@ -94,11 +94,11 @@ function selectSuggestion(suggestion) {
 <template>
     <div class='lg:px-10 sm:px-5 md:px-8 mt-2'>
 
-        <div class='flex justify-between'>
+        <div class='flex justify-between lg:flex-row sm:flex:col xs:flex-col md:flex-row'>
             <div class='relative'>
                 <input type="text" v-model="searchQuery" @input='suggestProducts' @click='showSuggestion === true'
                     placeholder="Search Products..."
-                    class="mb-2 px-4 py-2 rounded border border-gray-500 focus:outline-none focus:border-blue-500">
+                    class="mb-2 px-4 py-2 rounded border border-gray-500 focus:outline-none focus:border-blue-500 w-full">
                 <div class='absolute bg-slate-500 text-white rounded shadow-md w-25 h-32 overflow-y-auto'>
                     <ul v-if='showSuggestion && suggestions.length'>
                         <li v-for='suggestion in suggestions' :key='suggestion?.id' @click='selectSuggestion(suggestion)'>
@@ -125,13 +125,14 @@ function selectSuggestion(suggestion) {
                 <option value="descending">Low</option>
             </select>
             <button @click="resetFilters"
-        class="mb-2 px-4 py-2 rounded border border-red-500 text-red-400 focus:outline-none hover:bg-red-500 hover:text-white transition-colors duration-300">
-    Reset
-</button>
+                class="mb-2 px-4 py-2 rounded border border-red-500 text-red-400 focus:outline-none hover:bg-red-500 hover:text-white transition-colors duration-300">
+                Reset
+            </button>
 
         </div>
         <div v-if="loading">Loading...</div>
         <div v-if="error">Error: {{ error }}</div>
 
         <Products :data="filteredProducts" />
-</div></template>
+    </div>
+</template>
