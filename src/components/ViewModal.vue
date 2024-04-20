@@ -33,7 +33,7 @@ console.log(props, "open")
 <style>
 .container {
     position: fixed;
-    top: 20%;
+    top: 14%;
     left: 10%;
     width: 80%;
     height: 70vh;
@@ -59,6 +59,11 @@ console.log(props, "open")
 
 .pro-header h2 {
     margin: 0;
+}
+
+.pro-body {
+    width: 90%;
+    height: 80vh;
 }
 
 .pro-body img {

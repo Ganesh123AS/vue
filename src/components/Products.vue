@@ -40,8 +40,8 @@ const getStarRating = (rating) => {
       </div>
       <div class="product-details">
         <div class="product-info">
-          <div class="product-title">{{ product.title }}</div>
-          <div class="product-description">{{ product.description.slice(0, 50) }}</div>
+          <div class="product-title">{{ product.title.slice(0, 16) }}...</div>
+          <div class="product-description">{{ product.description.slice(0, 45) }}...</div>
         </div>
         <div class="product-meta">
           <div class="product-price">RS. {{ product.price }}</div>
