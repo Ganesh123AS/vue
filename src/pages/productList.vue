@@ -21,23 +21,23 @@ watch([products, searchQuery, selected, price], ([newProducts, newSearchQuery, n
 
     // Filter by input field
     if (newSearchQuery.trim() !== '') {
-        filtered = filtered.filter(product =>
-            product.title.toLowerCase().includes(newSearchQuery.trim().toLowerCase())
+        filtered = filtered?.filter(product =>
+            product?.title.toLowerCase().includes(newSearchQuery.trim().toLowerCase())
         );
     }
 
     // Filter by category
     if (newSelected.trim() !== '') {
-        filtered = filtered.filter(product =>
-            product.category.toLowerCase().includes(newSelected.trim().toLowerCase())
+        filtered = filtered?.filter(product =>
+            product?.category.toLowerCase().includes(newSelected.trim().toLowerCase())
         );
     }
 
     // filter by price
     if (newPrice === 'ascending') {
-        filtered.sort((a, b) => a.price - b.price);
+        filtered.sort((a, b) => a?.price - b?.price);
     } else if (newPrice === 'descending') {
-        filtered.sort((a, b) => b.price - a.price);
+        filtered.sort((a, b) => b?.price - a?.price);
     }
 
     filteredProducts.value = filtered;
@@ -46,16 +46,16 @@ watch([products, searchQuery, selected, price], ([newProducts, newSearchQuery, n
 
 // reset button to clear field
 function resetFilters() {
-    searchQuery.value = '';
-    selected.value = '';
-    price.value = '';
+    searchQuery?.value = '';
+    selected?.value = '';
+    price?.value = '';
 }
 
 // function to check suggestion
 watch(products, (newProducts) => {
     // if suggestion is true
     if (showSuggestion) {
-        suggestions.value = newProducts.slice(0, 4);
+        suggestions?.value = newProducts.slice(0, 4);
     }
 });
 
@@ -63,13 +63,13 @@ watch(products, (newProducts) => {
 function suggestProducts() {
     showSuggestion = true;
     if (!searchQuery.value.trim()) {
-        suggestions.value = [];
+        suggestions?.value = [];
         return;
     }
 
     //   search suggestion show upto 4 value only
     const searchRegex = new RegExp(searchQuery.value.trim(), 'i');
-    suggestions.value = products.value.filter(product => searchRegex.test(product.title)).slice(0, 4);
+    suggestions.value = products?.value.filter(product => searchRegex.test(product?.title)).slice(0, 4);
 }
 
 // selct a suggestion value
