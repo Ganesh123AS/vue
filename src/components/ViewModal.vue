@@ -30,12 +30,10 @@ console.log(props, "open")
     </div>
 </template>
   
-
-  
 <style>
 .container {
     position: fixed;
-    top: 18%;
+    top: 20%;
     left: 10%;
     width: 80%;
     height: 70vh;
