@@ -23,15 +23,21 @@ console.log(isOpen, open)
 </script>
 
 <template>
- <div class='grid grid-cols-3 gap-2'>
+ <div class='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2'>
   <div v-for='product in props.data' :key='product?.id' @click='openModal(product)'>
-    <div class='img'>
+    <div class='img flex justify-center items-center'>
       <img :src="product?.image" alt="pro-image" />
     </div>
-    <div class='flex justify-between'>
-      {{ product?.price }}
-      {{ product?.rating?.rate }}
-      {{ product?.rating?.count }}
+    <div class='flex flex-col'>
+      RS. {{ product?.price }}
+      <div class='flex justify-between'>
+        <div class='flex'>
+          <span>Rating:</span> <h6>{{ product?.rating?.rate }}</h6>
+        </div>
+        <div class='flex'>
+          <span>Remaining:</span> <p>{{ product?.rating?.count }}</p>
+        </div>
+      </div>
     </div>
     <div>
       {{ product?.title }}

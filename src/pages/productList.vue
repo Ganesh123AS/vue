@@ -26,18 +26,29 @@ watch([products, searchQuery, selected, price], ([newProducts, newSearchQuery, n
         );
     }
 
+    // // Filter by category
+    // if (newSelected.trim() !== '') {
+    //     filtered = filtered?.filter(product =>
+    //         product?.category.toLowerCase().includes(newSelected.trim().toLowerCase())
+    //     );
+    // }
+
     // Filter by category
     if (newSelected.trim() !== '') {
-        filtered = filtered?.filter(product =>
-            product?.category.toLowerCase().includes(newSelected.trim().toLowerCase())
-        );
+        if (newSelected.trim() === 'Rating') {
+            filtered = filtered.sort((a, b) => b?.rating?.rate - a?.rating?.rate);
+        } else {
+            filtered = filtered.filter(product =>
+                product?.category.toLowerCase().includes(newSelected.trim().toLowerCase())
+            );
+        }
     }
 
     // filter by price
     if (newPrice === 'ascending') {
-        filtered.sort((a, b) => a?.price - b?.price);
-    } else if (newPrice === 'descending') {
         filtered.sort((a, b) => b?.price - a?.price);
+    } else if (newPrice === 'descending') {
+        filtered.sort((a, b) => a?.price - b?.price);
     }
 
     filteredProducts.value = filtered;
@@ -81,32 +92,43 @@ function selectSuggestion(suggestion) {
 </script>
 
 <template>
-    <div>
-        <h1 class="text-red-800 uppercase">Products</h1>
-        <input type="text" v-model="searchQuery" @input='suggestProducts' @click='showSuggestion === true'
-            placeholder="Search Products...">
-        <ul v-if='showSuggestion && suggestions.length'>
-            <li v-for='suggestion in suggestions' :key='suggestion?.id' @click='selectSuggestion(suggestion)'>{{
-                suggestion?.title }}</li>
-        </ul>
+    <div class='lg:px-10 sm:px-5 md:px-8 mt-2'>
 
-        <select v-model="selected">
-            <option disabled value="">Please select Category</option>
-            <option>men's clothing</option>
-            <option>women's clothing</option>
-            <option>jewelery</option>
-            <option>electronics</option>
-        </select>
+        <div class='flex justify-between'>
+            <div class='relative'>
+                <input type="text" v-model="searchQuery" @input='suggestProducts' @click='showSuggestion === true'
+                    placeholder="Search Products..."
+                    class="mb-2 px-4 py-2 rounded border border-gray-500 focus:outline-none focus:border-blue-500">
+                <div class='absolute bg-slate-500 text-white rounded shadow-md w-25 h-32 overflow-y-auto'>
+                    <ul v-if='showSuggestion && suggestions.length'>
+                        <li v-for='suggestion in suggestions' :key='suggestion?.id' @click='selectSuggestion(suggestion)'>
+                            {{ suggestion?.id }} {{ suggestion?.title }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-        <select v-model="price">
-            <option disabled value="">Price</option>
-            <option value="ascending">Price Ascending</option>
-            <option value="descending">Price Descending</option>
-        </select>
-        <button @click="resetFilters">Reset</button>
+            <select v-model="selected"
+                class='mb-2 px-4 py-2 rounded border border-gray-500 focus:outline-none focus:border-blue-500'>
+                <option disabled value="">Please select Category</option>
+                <option>Men's Clothing</option>
+                <option>Women's Clothing</option>
+                <option>Jewelery</option>
+                <option>Electronics</option>
+                <option>Rating</option>
+            </select>
+
+            <select v-model="price"
+                class='mb-2 px-4 py-2 rounded border border-gray-500 focus:outline-none focus:border-blue-500'>
+                <option disabled value="">Price</option>
+                <option value="ascending">High</option>
+                <option value="descending">Low</option>
+            </select>
+            <button @click="resetFilters"
+                class='mb-2 px-4 py-2 rounded border border-gray-500 focus:outline-none hover:bg-blue-500 hover:text-white'>Reset</button>
+        </div>
         <div v-if="loading">Loading...</div>
         <div v-if="error">Error: {{ error }}</div>
-        <div v-else>No products found</div>
+
         <Products :data="filteredProducts" />
-    </div>
-</template>
+</div></template>
